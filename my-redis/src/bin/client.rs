@@ -50,6 +50,14 @@ async fn main() {
         reciver.await;
     });
 
+    let num = 100i32;
+
+    let res = (1..=num / 2).filter(|&n| num % n == 0).sum::<i32>();
+    (1..)
+        .take_while(|&n| n * n > num)
+        .filter(|&n|num % n == 0 && num != n)
+        .map(|n| n + num / n)
+        .sum::<i32>()
 
     let manage = tokio::spawn(async move {
         while let Some(v) = rx.recv().await {
